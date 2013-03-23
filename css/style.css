@@ -1,0 +1,199 @@
+@import url(http://fonts.googleapis.com/css?family=Cutive+Mono);
+@import url(http://fonts.googleapis.com/css?family=Quicksand);
+
+html, body
+{
+	font-family: 'Quicksand', sans-serif;
+	font-size: 10px;
+	background: #1C2423;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	color: rgb(250,255,239);
+	overflow: hidden;
+	height: 100%;
+}
+
+h1
+{
+	font-family: 'Cutive Mono', sans-serif;
+	font-size: 5em;
+	text-align: center;
+	float: left;
+	font-weight: lighter;
+	margin: 0;
+	padding: 0;
+	letter-spacing: -0.05em;
+	color: #FFFDDB;
+	margin-top: 4.5em;
+	display: none;
+	-webkit-user-select: none;
+	width: 100%;
+	background-color: #C80000;
+	border-radius: 0 0.1em 0 0.1em;
+	box-shadow: 0.1em 0.1em 0 #020202,
+				-0.1em -0.1em 0 #FFFDDB;
+}
+
+.wrapper
+{
+	margin: 0 auto;
+	width: 25em;
+	overflow: auto;
+}
+
+#results, #list
+{
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 20em;
+	float: left;
+	margin: 1em 0 0;
+	border: 0.2em dashed #FFFDDB;
+	border-left: none;
+	border-right: none;
+	display: none;
+}
+
+#activity
+{
+	font-family: 'Quicksand', sans-serif;
+	text-align: center;
+	width: 12em;
+	font-size: 2em;
+	background: #FFFDDB;
+	border-radius: 0 0.5em 0 0.5em;
+	color: rgba(104,74,61,0.57);
+	margin: 1em 0 0;
+	padding: 0.2em;
+	display: none;
+	float: left;
+	border: 0.1em solid #C80000;
+	border-left: none;
+	border-right: none;
+}
+
+.activity, .entry
+{
+	text-align: center;
+	width: 12em;
+	font-size: 2em;
+	background: #FFFDDB;
+	border-radius: 0 0.5em 0 0.5em;
+	box-shadow: 0.1em 0.1em 0 #020202,
+				-0.1em -0.1em 0 #C80000;
+	color: #684A3D;
+	margin: 0.2em 0 0;
+	padding: 0.2em;
+	float: left;
+	-webkit-user-select: none;
+	cursor: pointer;
+}
+
+.entry .plus, .entry .minus
+{
+	float: right;
+	font-size: 1em;
+}
+
+.entry .minus
+{
+	font-weight: bold;
+}
+
+.entry .checkbox
+{
+	float: left;
+	width: 1em;
+	height: 1em;
+	background: #BFA26F;
+	font-size: 1em;
+	margin: 0.01em 0 0;
+	border-radius: 0 0.5em 0 0.5em;
+	box-shadow: 0.1em 0.1em 0 #020202,
+				-0.1em -0.1em 0 #C80000;
+}
+
+.checked
+{
+	text-decoration: line-through;
+	opacity: 0.7;
+}
+
+.checked .checkbox
+{
+	background-color: #1C2423;
+	box-shadow: 0.1em 0.1em 0 #BFA26F,
+				-0.1em -0.1em 0 #C80000;
+}
+
+#list
+{
+	display: none;
+}
+
+#arrow, .label
+{
+	display: none;
+	text-align: center;
+	width: 100%;
+	height: 1.3em;
+	font-weight: bold;
+	float: left;
+	font-size: 2.5em;
+	border: none;
+	-webkit-user-select: none;
+	color: rgb(250,255,239);
+	font-weight: normal;
+	font-family: 'Quicksand', sans-serif;
+	margin: 0.1em;
+	padding: 0;
+	background: transparent;
+}
+
+.label
+{
+	font-family: 'Cutive Mono', sans-serif;
+	border-bottom: 0.2em dashed #FFFDDB;
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : landscape) {
+	body{
+		font-size: 5px;
+	}
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 640px) 
+and (orientation : landscape) {
+	body{
+		font-size: 5px;
+	}
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+	body{
+		font-size: 20px;
+	}
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+	body{
+		font-size: 15px;
+	}
+	
+	#results, #list{
+		height: 13em;
+	}
+	
+}
