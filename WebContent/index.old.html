@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Check_it</title>
+		<link rel="shortcut icon" href="icons/android/icon_48.ico" />
+		<link rel="icon" type="image/png" href="icon_57.png" />
+
+
+		<link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.2.0/jquery.mobile-1.2.0.css" />
+		<!-- <link rel="stylesheet" href="jquery.mobile/twitter_theme.css" /> -->
+		<link rel="stylesheet" href="uimanager.css" />
+		<style>
+			/* App custom styles */
+
+			/* .test {
+				background: url(jquery.mobile/images/twitter_theme_bg_tile.jpg) repeat;
+			} */
+		</style>
+
+		<!-- JQUERY and JQUERY MOBILE -->
+		<script src="jquery/jquery-1.8.2.js"></script>
+		<script src="jquery.mobile/jquery.mobile-1.2.0/jquery.mobile-1.2.0.js"></script>
+		<!-- <script src="my.js"></script> -->
+		<!-- PHONEGAP -->
+		<script src="cordova-2.1.0.js"></script>
+		<!-- PHONEGAP API -->
+		<script src="apis/storage2.js"></script>
+		<script src="apis/geolocation2.js"></script>
+		<!-- <script src="apis/notification.js"></script> -->
+		<script src="apis/camera2.js"></script>
+		<script src="apis/file2.js"></script>
+
+		<!-- LIBS -->
+		<!-- <script src="lib/jqm.page.params.js"></script> -->
+		<script src="lib/d8-0.2.2.min.js"></script>
+		<script src="lib/jshash-2.2/md5.js"></script>
+
+		<!--Includes-->
+		<link href="lib/mobiscroll.datetime-2.4.4/css/mobiscroll.custom-2.4.4.min.css" rel="stylesheet" type="text/css" />
+		<script src="lib/mobiscroll.datetime-2.4.4/js/mobiscroll.custom-2.4.4.min.js" type="text/javascript"></script>
+
+		<!-- PROGRAM -->
+		<script src="js/utils.js"></script>
+
+		<script src="js/bl-sync.js"></script>
+		<script src="js/bl.js"></script>
+		<script src="js/pages.js"></script>
+		<!-- Inizializzamo alla Fine -->
+		<script src="js/init.js"></script>
+
+		<!-- <link rel="stylesheet" href="jquery.mobile/android-theme.css" />
+		<script type="text/javascript">
+		var DEBUG_ANDROID_THEME=true
+		</script>
+		<script type="text/javascript" src="jquery.mobile/jquery.mobile.android-theme.js"></script> -->
+
+		<!-- Stile per Effettuato-Non Effettuato -->
+		<style>
+			.containing-element .ui-slider-switch {
+				width: 11em;
+			}
+		</style>
+
+	</head>
+	<body>
+		<!-- Login -->
+		<div data-role="page" data-theme="b" id="pageLogin">
+			<div data-theme="a" data-role="header">
+				<a data-role="button" data-transition="flip" href="#pageSettings" data-icon="gear" data-iconpos="left" class="ui-btn-right">Conf.</a>
+				<h3>MiliarumMOBILE</h3>
+				<a data-role="button" data-transition="fade" data-icon="delete" data-iconpos="left" class="ui-btn-left" id="btnLoginChiudi">Chiudi</a>
+			</div>
+			<div data-role="content" style="padding: 15px">
+				<fieldset data-role="controlgroup">
+					<!-- <div style="width: 288px; height: 100px; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8;"> -->
+					<!-- <img src="http://codiqa.com/static/images/v2/image.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px" /> -->
+					<!--
+					<div style="width: 288px; height: 100px; position: relative;">
+						<img src="icons/ios/icon_114.png" alt="image" />
+					</div>
+					-->
+				</fieldset>
+
+				<fieldset data-role="controlgroup">
+					<label for="txtUsername"> Utente: </label>
+					<input id="txtUsername" type="text" />
+					<label for="txtPassword"> Password: </label>
+					<input id="txtPassword" type="password" />
+				</fieldset>
+
+				<!-- <fieldset data-role="controlgroup" data-type="vertical" data-mini="true"> -->
+				<fieldset data-role="controlgroup" data-mini="true">
+
+					<input name="chkRemember" id="chkRemember" type="checkbox" />
+					<label for="chkRemember"> Ricorda </label>
+				</fieldset>
+
+
+				<!-- <a data-role="button" data-transition="slideup" href="#pageMenu" data-icon="check" data-iconpos="left"> Login </a> -->
+				<a id="btnLogin" data-role="button" data-icon="check" data-iconpos="left"> Login </a>
+			</div>
+		</div>
+		<!-- Menu -->
+		<div data-role="page" data-theme="b" id="pageMenu">
+			<div data-theme="a" data-role="header">
+				<h3>Menu</h3>
+			</div>
+			<div data-role="content" style="padding: 15px">
+				<ul data-role="listview" data-theme="c" data-inset="true">
+					<li>
+						<a href="#pageODG" data-transition="slide"> Ordine del Giorno </a>
+					</li>
+					<li>
+						<a href="#pageAccertamentiElenco" data-transition="slide"> Accertamenti e Verbali </a>
+					</li>
+					<li>
+						<a href="#pageSync" data-transition="slide"> Sincronizza </a>
+					</li>
+				</ul>
+				<!-- <style>
+				.containing-element .ui-slider-switch {
+					width: 9em;
+				}
+				</style> -->
+				<div class="containing-element">
+					<label for="btnMenuGPS">GPS:</label>
+					<select name="btnMenuGPS" id="btnMenuGPS" data-role="slider">
+						<option value="off">Spento</option>
+						<option value="on">Acceso</option>
+					</select>
+				</div>
+
+				<div id="txtMenuCurPos"></div>
+				<!--
+					<div id="showMap">
+					<style>
+					#map {
+						width: 180px;
+						height: 140px;
+						border: 2px solid #666;
+						display: block;
+						visibility: hidden;
+						margin: 1.0em auto;
+					}
+					</style>
+					<img id="map" />
+					 
+				</div>
+				-->
+
+				<ul data-role="listview" data-divider-theme="b" data-inset="true">
+					<li data-theme="b">
+						<a href="#pageLogin" data-transition="slidedown">Esci</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Ordine del Giorno -->
+		<div data-role="page" data-theme="b" id="pageODG">
+			<div data-theme="a" data-role="header">
+				<a data-role="button" data-transition="slide" data-direction="reverse" href="#pageMenu" data-icon="back" data-iconpos="left"> Menu </a>
+				<h3>Ordine del Giorno</h3>
+			</div>
+			<div data-role="content" style="padding: 15px">
+
+				<ul data-role="listview" data-divider-theme="b" data-inset="true">
+					<li data-theme="b">
+						<a href="#pageServiceOrder" data-transition="slide" onclick="pageParamPush(null);">Nuovo Servizio</a>
+					</li>
+				</ul>
+
+				<ul id="listServices" data-role="listview" data-divider-theme="e" data-inset="true">
+					<!--
+					<li id="listServicesTemplate" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="d"
+						class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-d">
+						<div class="ui-btn-inner ui-li">
+							<div class="ui-btn-text">
+								<a href="index.html" class="ui-link-inherit">
+									<p class="ui-li-aside ui-li-desc">
+										<strong>6:24</strong>PM
+									</p>
+									<h3 class="ui-li-heading">Stephen Weber</h3>
+									<p class="ui-li-desc">
+										<strong>You've been invited to a meeting at Filament Group in Boston, MA</strong>
+									</p>
+									<p class="ui-li-desc">Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+								</a>
+							</div>
+							<span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
+						</div>
+					</li>
+					-->
+
+
+
+					<!-- <li data-theme="b"><a href="#pageServiceOrder" data-transition="slide"> Ordine del Giorno </a></li> -->
+				</ul>
+			</div>
+		</div>
+		<!-- Servizio -->
+		<div data-role="page" data-theme="b" id="pageServiceOrder">
+			<div data-theme="a" data-role="header">
+				<a data-role="button" data-transition="slide" data-direction="reverse" href="#pageODG" data-icon="back" data-iconpos="left"> O.d.G. </a>
+				<h3>Servizio</h3>
+			</div>
+			<div data-role="content" style="padding: 15px">
+
+				<div data-role="collapsible-set" data-theme="e" id="groupServiceOrder">
+					<div data-role="collapsible" data-content-theme="c" id="sectionGenerale">
+						<h3>Generale</h3>
+						<label for="txtServizio_competencyDate">Data Competenza:</label>
+						<input type="text" name="txtServizio_competencyDate" id="txtServizio_competencyDate" class="scrollerDate" />
+
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<!-- <legend>Inizio:</legend> -->
+								<label for="txtServizio_fromDate">Data inizio:</label>
+								<input type="text" name="txtServizio_fromDate" id="txtServizio_fromDate" class="scrollerDate" />
+							</div>
+							<div class="ui-block-b">
+								<label for="txtServizio_fromTime">Ora inizio:</label>
+								<input type="text" name="txtServizio_fromTime" id="txtServizio_fromTime" class="scrollerTime" />
+							</div>
+						</div>
+
+
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<label for="txtServizio_toDate">Data fine:</label>
+								<input type="text" name="txtServizio_toDate" id="txtServizio_toDate" class="scrollerDate" />
+							</div>
+							<div class="ui-block-b">
+								<label for="txtServizio_toTime">Ora fine:</label>
+								<input type="text" name="txtServizio_toTime" id="txtServizio_toTime" class="scrollerTime" />
+							</div>
+						</div>
+
+						<label for="txtServizioComune">Comune:</label>
+						<select name="txtServizioComune" id="txtServizioComune">
+							<option value="">Seleziona un Comune</option>
+						</select>
+
+
+						<label for="txtServizioStrada">Strada:</label>
+						<select name="txtServizioStrada" id="txtServizioStrada">
+							<option value="">Seleziona una Strada</option>
+						</select>
+
+						<label for="txtServizioTipo">Tipo del Servizio:</label>
+						<select name="txtServizioTipo" id="txtServizioTipo">
+							<option value="">Seleziona il Tipo</option>
+						</select>
+
+						<div class="containing-element">
+							<!-- <fieldset data-role="controlgroup" data-type="horizontal"> -->
+							<!-- <legend>Stato del Servizio:</legend> -->
+							<label for="txtServizioStato">Stato del Servizio:</label>
+							<select name="txtServizioStato" id="txtServizioStato" data-role="slider">
+								<option value="NOT_DONE">Non Effettuato</option>
+								<option value="DONE">Effettuato</option>
+							</select>
+							<!--
+							<input type="radio" name="radio-choice" id="radio-choice-1" value="E" checked="checked" />
+							<label for="radio-choice-1">Effettuato</label>
+	
+							<input type="radio" name="radio-choice" id="radio-choice-2" value="NE" />
+							<label for="radio-choice-2">Non Effettuato</label>
+							-->
+							<!-- </fieldset> -->
+						</div>
+
+
+						<label for="txtServizioStato">Note:</label>
+						<textarea name="txtServizio_notes" id="txtServizio_notes"></textarea>
+
+					</div>
+
+					<div data-role="collapsible" data-content-theme="c" id="sectionMezzo">
+						<h3>Mezzo</h3>
+
+						<select name="txtServizioMezzo" id="txtServizioMezzo"/></select>
+
+						<div class="containing-element" id="divServizioMezzoDettagli">
+							<div class="ui-grid-a">
+								<div class="ui-block-a">
+									<label for="txtServizioMezzoMarca">Marca:</label>
+									<input type="text" name="txtServizioMezzoMarca" id="txtServizioMezzoMarca" readonly />
+								</div>
+								<div class="ui-block-b">
+									<label for="txtServizioMezzoModello">Modello:</label>
+									<input type="text" name="txtServizioMezzoModello" id="txtServizioMezzoModello" readonly />
+								</div>
+							</div>                                          
+
+							<div class="ui-grid-a">
+								<div class="ui-block-a">
+									<label for="txtServizioMezzoTarga">Targa:</label>
+									<input type="text" name="txtServizioMezzoTarga" id="txtServizioMezzoTarga" readonly />
+								</div>
+								<div class="ui-block-b">
+									<label for="txtServizioMezzoCodice">Codice:</label>
+									<input type="text" name="txtServizioMezzoCodice" id="txtServizioMezzoCodice" readonly />                                               
+								</div>
+							</div>                                          
+						</div>                                        
+					</div>
+
+					<div data-role="collapsible" data-content-theme="c" id="sectionRichiedente">
+						<h3>Richiedente</h3>
+						<p>Funzionalità ancora da Implementare</p>
+					</div>
+
+					<div data-role="collapsible" data-content-theme="c" id="sectionPattuglia">
+						<h3>Pattuglia</h3>
+
+						<div id="divRuntimePattuglia"></div>
+      				</div>
+
+					<div data-role="collapsible" data-content-theme="c" id="sectionOvertime">
+						<h3>Straordinario</h3>
+
+						<input name="chkOvertime" id="chkOvertime" type="checkbox" />
+						<label for="chkOvertime"> Straordinario </label>
+
+						<div class="containing-element" id="divServizioOvertimeDettagli">
+							<div class="ui-grid-a">
+								<div class="ui-block-a">
+									<label for="txtServizio_fromDateOvertime">Data inizio:</label>
+									<input type="text" name="txtServizio_fromDateOvertime" id="txtServizio_fromDateOvertime" class="scrollerDate" />
+								</div>
+								<div class="ui-block-b">
+									<label for="txtServizio_fromTimeOvertime">Ora inizio:</label>
+									<input type="text" name="txtServizio_fromTimeOvertime" id="txtServizio_fromTimeOvertime" class="scrollerTime" />
+								</div>
+							</div>
+
+
+							<div class="ui-grid-a">
+								<div class="ui-block-a">
+									<label for="txtServizio_toDateOvertime">Data fine:</label>
+									<input type="text" name="txtServizio_toDateOvertime" id="txtServizio_toDateOvertime" class="scrollerDate" />
+								</div>
+								<div class="ui-block-b">
+									<label for="txtServizio_toTimeOvertime">Ora fine:</label>
+									<input type="text" name="txtServizio_toTimeOvertime" id="txtServizio_toTimeOvertime" class="scrollerTime" />
+								</div>
+							</div>
+
+							<input id="btnServizioAllOvertime" type="button" value="Tutto straordinario" data-theme="b" />
+						</div>                                        
+					</div>
+
+					<div data-role="collapsible" data-content-theme="c" id="sectionAllegati">
+						<h3>Allegati</h3>
+						<!-- <p>Funzionalità ancora da Implementare</p> -->
+						<ul data-role="listview" id="listAllegati" data-split-icon="minus" data-split-theme="d" data-inset="true">
+							<!--
+							<li>							
+								<a href="#">
+									<img src="../../_assets/img/album-bb.jpg">
+									<h2>Broken Bells</h2>
+									<p>Broken Bells</p>
+								</a>
+								<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Elimina</a>
+							</li>
+							-->
+						</ul>
+						<input id="btnServizioAllegatoAggiungi" data-icon="plus" data-iconpos="left" type="button" value="Aggiungi Allegati" data-theme="b" data-mini="true" />
+					</div>
+				</div>
+
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<a data-role="button" data-transition="slide" data-direction="reverse" href="#pageODG" data-icon="delete" data-iconpos="top" data-theme="c"> Annulla </a>
+					</div>
+					<div class="ui-block-b">
+						<input id="btnServizioSalva" data-icon="check" data-iconpos="top" type="button" value="Salva" data-theme="b" />
+					</div>
+				</div>
+
+			</div>		
+		</div>
+
+		<!-- Accertamenti e Verbali -->
+
+		<div data-role="page" data-theme="b" id="pageAccertamentiElenco">
+			<div data-theme="a" data-role="header">
+				<h3>Accertamenti e Verbali</h3>
+				<a data-role="button" data-transition="slide" data-direction="reverse" href="#pageMenu" data-icon="back" data-iconpos="left" class="ui-btn-left"> Menu </a>
+			</div>
+			<div data-role="content" style="padding: 15px" id="contentAccertamentiElenco">
+				<!-- <form action="" method="get" id="formAccertamentiElenco"> -->
+
+				<ul data-role="listview" data-divider-theme="b" data-inset="true">
+					<li data-theme="b">
+						<a href="#pageAccertamenti" data-transition="slide" onclick="pageParamPush(null);">Nuova Data</a>
+					</li>
+				</ul>
+
+				<ul id="listAccertamentiElenco" data-role="listview" data-divider-theme="b" data-inset="true">
+
+				</ul>
+
+				<!-- </form> -->
+			</div>
+		</div>
+
+		<div data-role="page" data-theme="b" id="pageAccertamenti">
+			<div data-theme="a" data-role="header">
+				<h3>Accertamenti e Verbali</h3>
+				<a data-role="button" data-transition="slide" data-direction="reverse" href="#pageAccertamentiElenco" data-icon="back" data-iconpos="left" class="ui-btn-left">
+					Elenco </a>
+			</div>
+			<div data-role="content" style="padding: 15px" id="contentAccertamenti">
+				<form action="" method="post" id="formAccertamenti">
+
+					<div data-role="fieldcontain" style="padding-bottom: 15px">
+						<label for="txtAccertamentiData">Data:</label>
+						<input type="text" name="txtAccertamentiData" id="txtAccertamentiData" class="scrollerDate" />
+					</div>
+
+					<div id="runtimeAccertamenti"></div>
+					<!--
+				<ul id="listAccertamenti" data-role="listview" data-divider-theme="b"
+					data-inset="true" >
+					-->
+					<!--
+					<li class="ui-body ui-body-b ui-li ui-li-static ui-body-c ui-corner-bottom">
+					<fieldset class="ui-grid-a">
+							<div class="ui-block-a"><div data-theme="d" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-up-d" aria-disabled="false"><span class="ui-btn-inner ui-btn-corner-all" aria-hidden="true"><span class="ui-btn-text">Cancel</span></span><button type="submit" data-theme="d" class="ui-btn-hidden" aria-disabled="false">Cancel</button></div></div>
+							<div class="ui-block-b"><div data-theme="a" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-hover-a ui-btn-up-a" aria-disabled="false"><span class="ui-btn-inner ui-btn-corner-all" aria-hidden="true"><span class="ui-btn-text">Submit</span></span><button type="submit" data-theme="a" class="ui-btn-hidden" aria-disabled="false">Submit</button></div></div>
+					</fieldset>
+					</li>
+					-->
+					<!--
+				</ul>
+					-->
+
+					<!--
+				<div data-role="fieldcontain">
+				<label for="name">Text Input:</label>
+				<input type="text" name="name" id="name" value="" />
+				</div>
+				
+				<ul id="listAccertament2i" data-role="listview" data-divider-theme="b"
+					data-inset="true" >
+					<li data-role="fieldcontain" data-theme="b" >
+						<label for="aaa">aaa</label>
+						<input type="number" min="0" name="aaa" id="aaa" value=""  />
+					</li>
+					<li data-role="fieldcontain" data-theme="b" >
+						<label for="aaa1">aaa</label>
+						<input type="number" min="0" name="aaa1" id="aaa1" value=""  />
+					</li>				
+				</ul>
+					-->
+
+					<!-- <input id="btnAccertamentiSalva" data-icon="check" data-iconpos="left" type="submit" value="Salva" /> -->
+					<input id="btnAccertamentiSalva" data-icon="check" data-iconpos="left" type="button" value="Salva" />
+
+				</form>
+			</div>
+		</div>
+		<!-- Sincronizza -->
+		<div data-role="page" data-theme="b" id="pageSync">
+			<div data-theme="a" data-role="header">
+				<h3>Sincronizza</h3>
+				<a data-role="button" data-transition="slide" data-direction="reverse" href="#pageMenu" data-icon="back" data-iconpos="left" class="ui-btn-left"> Menu </a>
+			</div>
+			<div data-role="content" style="padding: 15px">
+				<!-- <a data-role="button" data-transition="fade" href="#pageSync" data-icon="refresh" data-iconpos="left" id="btnSync"> Sincronizza </a> -->
+				<input type="button" value="Sincronizza" data-role="button" data-transition="fade" data-icon="refresh" data-iconpos="left" id="btnSync" class="disableWithLoading" />
+
+				<div class="containing-element">
+					<div id="lblSincronizza"></div>
+				</div>
+
+				<div id="logger" class="logger"></div>
+			
+			</div>
+		</div>
+		<!-- Impostazioni -->
+		<div data-role="page" data-theme="b" id="pageSettings">
+			<div data-theme="a" data-role="header">
+				<h3>Impostazioni</h3>
+				<a data-role="button" data-transition="flip" href="#pageLogin" data-icon="arrow-l" data-iconpos="left" class="ui-btn-left">Login</a>
+			</div>
+			<div data-role="content" style="padding: 15px">
+				<form action="">
+
+					<div id="appInfo"></div>
+
+					<fieldset data-role="controlgroup">
+						<label for="txtServerUrl"> Indirizzo del Server </label>
+						<!-- <input name="" id="txtServerUrl" placeholder="" value="" type="text" /> -->
+						<textarea name="txtServerUrl" id="txtServerUrl"></textarea>
+					</fieldset>
+
+					<!-- <input type="submit" value="Salva" id="btnImpSalva"/> -->
+					<!--
+					<a data-icon="check" data-iconpos="left" data-role="button" id="btnImpSalva" class="disableWithLoading">Salva</a>
+					<a data-icon="alert" data-iconpos="left" data-role="button" id="btnImpTest" class="disableWithLoading">Test Connessione</a>
+					<a data-icon="home" data-iconpos="left" data-role="button" id="btnImpDownload" class="disableWithLoading">Scarica dati Base</a>
+					-->
+					<input id="btnImpSalva" class="disableWithLoading" type="button" value="Salva" data-icon="check" data-iconpos="left" />
+					<input id="btnImpTest" class="disableWithLoading" type="button" value="Test Connessione" data-icon="check" data-iconpos="left" />
+					<input id="btnImpDownload" class="disableWithLoading" type="button" value="Scarica dati Base" data-icon="check" data-iconpos="left" />
+
+					<div id="logger" class="logger"></div>
+
+				</form>
+			</div>
+		</div>
+
+		<script>
+
+		</script>
+	</body>
+</html>

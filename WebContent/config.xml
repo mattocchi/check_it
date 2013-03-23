@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="it.attocchi.checkit" versionCode="1" version="0.0.1">
+
+	<!-- https://build.phonegap.com/docs/config-xml -->
+
+	<name>Check_it</name>
+
+	<description>
+		App Mobile sviluppata dal Team "FuoriTema" all'Hackathon101
+	</description>
+
+	<author href="http://www.check.it" email="check_it@gmail.com">
+		Check.it
+	</author>
+
+	<icon src="icon_57.png" gap:role="default" />
+
+	<icon src="icons/ios/icon_57.png" gap:platform="ios" width="57" height="57" />
+	<icon src="icons/ios/icon_72.png" gap:platform="ios" width="72" height="72" />
+	<icon src="icons/ios/icon_114.png" gap:platform="ios" width="114" height="114" />
+
+	<icon src="icons/android/icon_36.png" gap:platform="android" gap:density="ldpi" />
+	<icon src="icons/android/icon_48.png" gap:platform="android" gap:density="mdpi" />
+	<icon src="icons/android/icon_72.png" gap:platform="android" gap:density="hdpi" />
+	<icon src="icons/android/icon_96.png" gap:platform="android" gap:density="xhdpi" />
+
+	<feature name="http://api.phonegap.com/1.0/geolocation" />
+	<feature name="http://api.phonegap.com/1.0/network" />
+	<feature name="http://api.phonegap.com/1.0/camera" />
+	<feature name="http://api.phonegap.com/1.0/media" />
+	<feature name="http://api.phonegap.com/1.0/file"/>
+
+	<!-- <preference name="orientation" value="portrait" /> -->
+
+	<gap:splash src="splash.png" />
+	
+	<!--
+	<gap:splash src="splash/ios/Default.png" width="320" height="480" />
+	<gap:splash src="splash/ios/Default_at_2x.png" width="640" height="960" />
+	<gap:splash src="splash/ios/Default-Landscape.png" width="1024" height="768" />
+	<gap:splash src="splash/ios/Default-Portrait.png" width="768" height="1024" />
+
+	<gap:splash src="splash/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
+	<gap:splash src="splash/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
+	<gap:splash src="splash/android/hdpi.png" gap:platform="android" gap:density="hdpi" /> -->
+
+	<preference name="phonegap-version" value="2.1.0" />
+</widget>
